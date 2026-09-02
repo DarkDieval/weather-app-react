@@ -1,16 +1,52 @@
-# React + Vite
+# 🌤️ App del Clima
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicación web simple para consultar el clima actual de cualquier ciudad usando la API de OpenWeatherMap. Desarrollada con React, Vite y React Router.
 
-Currently, two official plugins are available:
+## Características
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- 🔍 Busca el clima de cualquier ciudad del mundo.
+- ⏳ Muestra un preloader mientras se obtienen los datos.
+- 📱 Diseño responsive (se adapta a móviles, tablets y escritorio).
+- 💾 Guarda la última ciudad buscada en `localStorage`.
+- 🎨 Estilos modernos con gradientes, blur y microanimaciones.
 
-## React Compiler
+## Tecnologías utilizadas
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **React** (con Hooks: `useState`, `useEffect`)
+- **React Router** (navegación entre páginas)
+- **Vite** (bundler y servidor de desarrollo)
+- **OpenWeatherMap API** (datos meteorológicos)
+- **Normalize.css** (reset de estilos)
+- **CSS puro** con metodología BEM y Flexbox
 
-## Expanding the ESLint configuration
+## Instalación y uso
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1. Clona el repositorio:
+   ```bash
+   git clone https://github.com/DarkDieval/weather-app-react.git
+   cd weather-app-react
+   Instala las dependencias:
+   ```
+
+bash
+npm install
+Crea un archivo .env en la raíz y añade tu clave de API de OpenWeatherMap:
+
+text
+VITE_OPENWEATHER_API_KEY=tu_clave_aqui
+Ejecuta el servidor de desarrollo:
+
+bash
+npm run dev
+Abre http://localhost:5173 en tu navegador.
+
+Enlaces
+Repositorio: https://github.com/DarkDieval/weather-app-react
+
+API utilizada: OpenWeatherMap
+
+Autores
+Desarrollado por Diego Valencia como proyecto final del bootcamp de TripleTen.
+
+Licencia
+Este proyecto es de uso educativo.
