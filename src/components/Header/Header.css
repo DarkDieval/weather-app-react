@@ -29,7 +29,8 @@
 }
 
 .header__logo-icon {
-  font-size: 1.8rem;
+  width: 32px;
+  height: 32px;
 }
 
 .header__nav {
