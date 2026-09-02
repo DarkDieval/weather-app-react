@@ -2,6 +2,11 @@
 
 Aplicación web simple para consultar el clima actual de cualquier ciudad usando la API de OpenWeatherMap. Desarrollada con React, Vite y React Router.
 
+## 🌐 Ver la aplicación en línea
+
+Puedes probar la aplicación desplegada en GitHub Pages:  
+[https://darkdieval.github.io/weather-app-react/](https://darkdieval.github.io/weather-app-react/)
+
 ## Características
 
 - 🔍 Busca el clima de cualquier ciudad del mundo.
