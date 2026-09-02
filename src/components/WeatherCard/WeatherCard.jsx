@@ -3,7 +3,7 @@ function WeatherCard({ data }) {
   const iconUrl = `https://openweathermap.org/img/wn/${weather[0].icon}@4x.png`;
 
   return (
-    <div className="weather-card">
+    <div className="weather-card__container">
       <h2 className="weather-card__city">{name}</h2>
       <img
         className="weather-card__icon"

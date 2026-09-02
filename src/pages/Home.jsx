@@ -22,7 +22,7 @@ function Home() {
   };
 
   return (
-    <div className="home">
+    <div className="home__container">
       <h1>🌤️ App del Clima</h1>
       <form onSubmit={handleSearch}>
         <input
@@ -30,6 +30,7 @@ function Home() {
           placeholder="Ej. Bogotá, Madrid, Lima"
           value={city}
           onChange={(e) => setCity(e.target.value)}
+          required
         />
         <button type="submit">Buscar</button>
       </form>
