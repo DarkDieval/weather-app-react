@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import weatherIcon from "../assets/weather-icon.png";
 
 function Home() {
   const [city, setCity] = useState("");
@@ -24,14 +23,7 @@ function Home() {
 
   return (
     <div className="home__container">
-      <h1>
-        <img
-          src={weatherIcon}
-          alt="Icono del clima"
-          style={{ width: 40, height: 40, verticalAlign: "middle" }}
-        />
-        App del Clima
-      </h1>
+      <h1>🌤️ App del Clima</h1>
       <form onSubmit={handleSearch}>
         <input
           type="text"

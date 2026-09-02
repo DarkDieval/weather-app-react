@@ -29,8 +29,7 @@
 }
 
 .header__logo-icon {
-  width: 32px;
-  height: 32px;
+  font-size: 2rem;
 }
 
 .header__nav {
