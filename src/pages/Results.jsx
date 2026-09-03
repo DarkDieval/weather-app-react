@@ -9,6 +9,7 @@ function Results() {
   const [weatherData, setWeatherData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [visibleCount, setVisibleCount] = useState(3);
 
   useEffect(() => {
     const getWeather = async () => {
@@ -21,6 +22,7 @@ function Results() {
       } catch (err) {
         console.error("Error:", err);
         setError(err.message);
+        setWeatherData(null);
       } finally {
         setLoading(false);
       }
@@ -39,21 +41,34 @@ function Results() {
 
   if (error) {
     return (
-      <div className="error__container">
-        <p>❌ Error: {error}</p>
-        <button onClick={() => window.history.back()}>Volver</button>
+      <div className="results__container">
+        <p className="error__message">{error}</p>
+        <button onClick={() => window.history.back()} className="back-button">
+          ← Volver
+        </button>
       </div>
     );
   }
 
   if (!weatherData) return null;
 
+  const results = [weatherData];
+  const visibleResults = results.slice(0, visibleCount);
+  const hasMore = visibleCount < results.length;
+
   return (
     <div className="results__container">
       <button onClick={() => window.history.back()} className="back-button">
         ← Volver
       </button>
-      <WeatherCard data={weatherData} />
+      {visibleResults.map((item, index) => (
+        <WeatherCard key={index} data={item} />
+      ))}
+      {hasMore && (
+        <button onClick={() => setVisibleCount(visibleCount + 3)}>
+          Mostrar más
+        </button>
+      )}
     </div>
   );
 }
