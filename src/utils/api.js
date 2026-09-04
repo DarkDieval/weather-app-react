@@ -1,7 +1,7 @@
 import { API_KEY, BASE_URL } from "./constants";
 
-export const fetchWeather = async (city) => {
-  const url = `${BASE_URL}/weather?q=${city}&appid=${API_KEY}&units=metric&lang=es`;
+export const fetchForecast = async (city) => {
+  const url = `${BASE_URL}/forecast?q=${city}&appid=${API_KEY}&units=metric&lang=es`;
   const response = await fetch(url);
   if (!response.ok) {
     if (response.status === 404) {
@@ -12,5 +12,6 @@ export const fetchWeather = async (city) => {
       );
     }
   }
-  return response.json();
+  const data = await response.json();
+  return data.list;
 };

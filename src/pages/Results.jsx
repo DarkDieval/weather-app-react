@@ -1,33 +1,33 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { fetchWeather } from "../utils/api";
+import { fetchForecast } from "../utils/api";
 import WeatherCard from "../components/WeatherCard/WeatherCard";
 
 function Results() {
   const [searchParams] = useSearchParams();
   const city = searchParams.get("city") || "Bogotá";
-  const [weatherData, setWeatherData] = useState(null);
+  const [forecastData, setForecastData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [visibleCount, setVisibleCount] = useState(3);
 
   useEffect(() => {
-    const getWeather = async () => {
+    const getForecast = async () => {
       try {
         setLoading(true);
         setError(null);
-        const data = await fetchWeather(city);
-        setWeatherData(data);
+        const data = await fetchForecast(city);
+        setForecastData(data);
         localStorage.setItem("lastCity", city);
       } catch (err) {
         console.error("Error:", err);
         setError(err.message);
-        setWeatherData(null);
+        setForecastData([]);
       } finally {
         setLoading(false);
       }
     };
-    getWeather();
+    getForecast();
   }, [city]);
 
   if (loading) {
@@ -50,11 +50,10 @@ function Results() {
     );
   }
 
-  if (!weatherData) return null;
+  if (!forecastData.length) return null;
 
-  const results = [weatherData];
-  const visibleResults = results.slice(0, visibleCount);
-  const hasMore = visibleCount < results.length;
+  const visibleResults = forecastData.slice(0, visibleCount);
+  const hasMore = visibleCount < forecastData.length;
 
   return (
     <div className="results__container">

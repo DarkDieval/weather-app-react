@@ -123,6 +123,12 @@ button:hover {
   margin: 5px 0;
 }
 
+.weather-card__time {
+  font-size: 0.9rem;
+  color: #636e72;
+  margin-bottom: 5px;
+}
+
 .preloader__container {
   text-align: center;
   color: white;

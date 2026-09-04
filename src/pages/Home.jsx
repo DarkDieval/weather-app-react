@@ -1,15 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Home() {
-  const [city, setCity] = useState("");
+  const [city, setCity] = useState(() => {
+    return localStorage.getItem("lastCity") || "";
+  });
   const [error, setError] = useState("");
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const lastCity = localStorage.getItem("lastCity");
-    if (lastCity) setCity(lastCity);
-  }, []);
 
   const handleSearch = (e) => {
     e.preventDefault();
