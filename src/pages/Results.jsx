@@ -18,10 +18,11 @@ function Results() {
   const [forecastData, setForecastData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [visibleCount, setVisibleCount] = useState(() => {
-    const saved = localStorage.getItem("visibleCount");
-    return saved ? parseInt(saved, 10) : 3;
-  });
+  const [visibleCount, setVisibleCount] = useState(3);
+
+  useEffect(() => {
+    setVisibleCount(3);
+  }, [city]);
 
   useEffect(() => {
     document.title = `ClimaCool - Pronóstico para ${formattedCity}`;
@@ -42,10 +43,6 @@ function Results() {
     };
     getForecast();
   }, [city, formattedCity]);
-
-  useEffect(() => {
-    localStorage.setItem("visibleCount", visibleCount.toString());
-  }, [visibleCount]);
 
   if (loading) {
     return (
@@ -102,6 +99,13 @@ function Results() {
           </p>
         )
       )}
+      <button
+        onClick={() => (window.location.href = "/")}
+        className="back-button"
+        style={{ marginTop: "16px" }}
+      >
+        🔍 Nueva búsqueda
+      </button>
     </div>
   );
 }
