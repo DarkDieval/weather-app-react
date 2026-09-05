@@ -8,7 +8,7 @@ export const fetchForecast = async (city) => {
       throw new Error("No se encontró ninguna ciudad con ese nombre.");
     } else {
       throw new Error(
-        "Error al obtener los datos. Intenta de nuevo más tarde.",
+        "No pudimos conectar con el servidor del clima. Revisa tu conexión a internet y vuelve a intentarlo.",
       );
     }
   }

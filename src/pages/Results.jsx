@@ -9,9 +9,13 @@ function Results() {
   const [forecastData, setForecastData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [visibleCount, setVisibleCount] = useState(3);
+  const [visibleCount, setVisibleCount] = useState(() => {
+    const saved = localStorage.getItem("visibleCount");
+    return saved ? parseInt(saved, 10) : 3;
+  });
 
   useEffect(() => {
+    document.title = `ClimaCool - Pronóstico para ${city}`;
     const getForecast = async () => {
       try {
         setLoading(true);
@@ -30,21 +34,31 @@ function Results() {
     getForecast();
   }, [city]);
 
+  useEffect(() => {
+    localStorage.setItem("visibleCount", visibleCount.toString());
+  }, [visibleCount]);
+
   if (loading) {
     return (
       <div className="preloader__container">
         <div className="spinner"></div>
-        <p>Buscando el clima...</p>
+        <p>🔍 Buscando el clima en {city}...</p>
       </div>
     );
   }
 
   if (error) {
+    const isNotFound =
+      error === "No se encontró ninguna ciudad con ese nombre.";
     return (
-      <div className="results__container">
+      <div className="error__container">
+        <span className="error__icon">{isNotFound ? "🔍" : "⚠️"}</span>
+        <h2 className="error__title">
+          {isNotFound ? "Ciudad no encontrada" : "Algo salió mal"}
+        </h2>
         <p className="error__message">{error}</p>
-        <button onClick={() => window.history.back()} className="back-button">
-          ← Volver
+        <button onClick={() => window.history.back()} className="error__button">
+          ← Volver a buscar
         </button>
       </div>
     );
@@ -57,16 +71,33 @@ function Results() {
 
   return (
     <div className="results__container">
+      {/* Mini título de la app */}
+      <div className="results__brand">
+        <span className="results__brand-icon">⛅</span>
+        <span className="results__brand-name">ClimaCool</span>
+      </div>
+
+      {/* Botón de volver mejorado */}
       <button onClick={() => window.history.back()} className="back-button">
-        ← Volver
+        <span className="back-button__icon">←</span> Volver
       </button>
+
+      <h2 className="results__city">🌤️ Pronóstico para {city}</h2>
+
       {visibleResults.map((item, index) => (
         <WeatherCard key={index} data={item} />
       ))}
-      {hasMore && (
+
+      {hasMore ? (
         <button onClick={() => setVisibleCount(visibleCount + 3)}>
           Mostrar más
         </button>
+      ) : (
+        forecastData.length > 3 && (
+          <p className="no-more-results">
+            📌 No hay más resultados disponibles
+          </p>
+        )
       )}
     </div>
   );
