@@ -3,9 +3,18 @@ import { useSearchParams } from "react-router-dom";
 import { fetchForecast } from "../utils/api";
 import WeatherCard from "../components/WeatherCard/WeatherCard";
 
+function capitalizeWords(str) {
+  return str
+    .toLowerCase()
+    .split(" ")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+}
+
 function Results() {
   const [searchParams] = useSearchParams();
   const city = searchParams.get("city") || "Bogotá";
+  const formattedCity = capitalizeWords(city);
   const [forecastData, setForecastData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -15,7 +24,7 @@ function Results() {
   });
 
   useEffect(() => {
-    document.title = `ClimaCool - Pronóstico para ${city}`;
+    document.title = `ClimaCool - Pronóstico para ${formattedCity}`;
     const getForecast = async () => {
       try {
         setLoading(true);
@@ -32,7 +41,7 @@ function Results() {
       }
     };
     getForecast();
-  }, [city]);
+  }, [city, formattedCity]);
 
   useEffect(() => {
     localStorage.setItem("visibleCount", visibleCount.toString());
@@ -42,7 +51,7 @@ function Results() {
     return (
       <div className="preloader__container">
         <div className="spinner"></div>
-        <p>🔍 Buscando el clima en {city}...</p>
+        <p>🔍 Buscando el clima en {formattedCity}...</p>
       </div>
     );
   }
@@ -71,23 +80,17 @@ function Results() {
 
   return (
     <div className="results__container">
-      {/* Mini título de la app */}
       <div className="results__brand">
         <span className="results__brand-icon">⛅</span>
         <span className="results__brand-name">ClimaCool</span>
       </div>
-
-      {/* Botón de volver mejorado */}
       <button onClick={() => window.history.back()} className="back-button">
         <span className="back-button__icon">←</span> Volver
       </button>
-
-      <h2 className="results__city">🌤️ Pronóstico para {city}</h2>
-
+      <h2 className="results__city">🌤️ Pronóstico para {formattedCity}</h2>
       {visibleResults.map((item, index) => (
         <WeatherCard key={index} data={item} />
       ))}
-
       {hasMore ? (
         <button onClick={() => setVisibleCount(visibleCount + 3)}>
           Mostrar más
