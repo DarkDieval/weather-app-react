@@ -302,3 +302,44 @@ button:hover {
   font-size: 0.9rem;
   margin-top: 20px;
 }
+
+.results__actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.results__button {
+  padding: 10px 22px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: #0984e3;
+  color: white;
+  box-shadow: 0 4px 12px rgba(9, 132, 227, 0.3);
+}
+
+.results__button:hover {
+  background: #0873c7;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(9, 132, 227, 0.4);
+}
+
+.results__button--secondary {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(4px);
+  color: #2d3436;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.results__button--secondary:hover {
+  background: rgba(255, 255, 255, 0.9);
+  transform: translateX(-4px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}

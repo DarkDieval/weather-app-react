@@ -88,24 +88,28 @@ function Results() {
       {visibleResults.map((item, index) => (
         <WeatherCard key={index} data={item} />
       ))}
-      {hasMore ? (
-        <button onClick={() => setVisibleCount(visibleCount + 3)}>
-          Mostrar más
+      <div className="results__actions">
+        {hasMore ? (
+          <button
+            onClick={() => setVisibleCount(visibleCount + 3)}
+            className="results__button"
+          >
+            Mostrar más
+          </button>
+        ) : (
+          forecastData.length > 3 && (
+            <p className="no-more-results" style={{ margin: 0 }}>
+              📌 No hay más resultados
+            </p>
+          )
+        )}
+        <button
+          onClick={() => (window.location.href = "/")}
+          className="results__button results__button--secondary"
+        >
+          🔍 Nueva búsqueda
         </button>
-      ) : (
-        forecastData.length > 3 && (
-          <p className="no-more-results">
-            📌 No hay más resultados disponibles
-          </p>
-        )
-      )}
-      <button
-        onClick={() => (window.location.href = "/")}
-        className="back-button"
-        style={{ marginTop: "16px" }}
-      >
-        🔍 Nueva búsqueda
-      </button>
+      </div>
     </div>
   );
 }
