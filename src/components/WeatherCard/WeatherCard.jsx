@@ -1,10 +1,22 @@
 function WeatherCard({ data }) {
-  const { name, main, weather, wind } = data;
+  const { main, weather, wind, dt_txt } = data;
   const iconUrl = `https://openweathermap.org/img/wn/${weather[0].icon}@4x.png`;
+
+  const date = new Date(dt_txt);
+  const formattedDate = date.toLocaleDateString("es-ES", {
+    weekday: "short",
+    day: "numeric",
+    month: "short",
+  });
+  const formattedTime = date.toLocaleTimeString("es-ES", {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
 
   return (
     <div className="weather-card__container">
-      <h2 className="weather-card__city">{name}</h2>
+      <h2 className="weather-card__city">{formattedDate}</h2>
+      <p className="weather-card__time">{formattedTime}</p>
       <img
         className="weather-card__icon"
         src={iconUrl}
