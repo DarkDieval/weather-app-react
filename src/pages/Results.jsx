@@ -21,15 +21,13 @@ function Results() {
   const [visibleCount, setVisibleCount] = useState(3);
 
   useEffect(() => {
-    setVisibleCount(3);
-  }, [city]);
-
-  useEffect(() => {
     document.title = `ClimaCool - Pronóstico para ${formattedCity}`;
+
     const getForecast = async () => {
       try {
         setLoading(true);
         setError(null);
+        setVisibleCount(3);
         const data = await fetchForecast(city);
         setForecastData(data);
         localStorage.setItem("lastCity", city);
@@ -41,6 +39,7 @@ function Results() {
         setLoading(false);
       }
     };
+
     getForecast();
   }, [city, formattedCity]);
 
