@@ -41,7 +41,7 @@ function Results() {
     };
 
     getForecast();
-  }, [city]);
+  }, [city, formattedCity]);
 
   if (loading) {
     return (
