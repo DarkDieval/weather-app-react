@@ -9,5 +9,14 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+    <script>
+      (function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const redirect = urlParams.get("redirect");
+        if (redirect) {
+          window.history.replaceState(null, "", decodeURIComponent(redirect));
+        }
+      })();
+    </script>
   </body>
 </html>
