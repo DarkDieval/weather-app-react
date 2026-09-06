@@ -41,7 +41,7 @@ function Results() {
     };
 
     getForecast();
-  }, [city, formattedCity]);
+  }, [city]);
 
   if (loading) {
     return (
@@ -103,7 +103,7 @@ function Results() {
           )
         )}
         <button
-          onClick={() => (window.location.href = "/")}
+          onClick={() => (window.location.href = "/weather-app-react/")}
           className="results__button results__button--secondary"
         >
           🔍 Nueva búsqueda
